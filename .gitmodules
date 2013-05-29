@@ -1,0 +1,3 @@
+[submodule "firmware/lib/Timer"]
+	path = firmware/lib/Timer
+	url = git://github.com/JChristensen/Timer.git
