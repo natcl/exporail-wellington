@@ -7,19 +7,20 @@ Timer t;
 
 char state[2];
 int blink_pins[BLINK_SIZE];
+int blink_state = LOW;
 
 void setup() {                
   Serial.begin(115200);
     
-  for (int i = 3 ; i < 70 ; i++) {
+  for (int i = 2 ; i < BLINK_SIZE ; i++) {
     pinMode(i, OUTPUT);  
   }
   
-  for (int i = 0 ; i < 70 ; i++) {
+  for (int i = 0 ; i < BLINK_SIZE ; i++) {
     blink_pins[i] = 0;  
   }
   
-  t.every(1000, blink);  
+  t.every(BLINK_LENGTH, blink);  
 }
 
 
@@ -43,14 +44,15 @@ void loop() {
 }
 
 void blink() {
+    if (blink_state == LOW) {
+      blink_state = HIGH;
+    }
+    else {
+      blink_state = LOW;
+    }
     for (int i = 0 ; i < BLINK_SIZE ; i++) {
       if (blink_pins[i]) {
-        if (digitalRead(i) == LOW) {
-          digitalWrite(i, HIGH);
-        }
-        else {
-          digitalWrite(i, LOW);
-        }
+        digitalWrite(i,blink_state);
       }
   }
 }
