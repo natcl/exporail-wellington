@@ -66,7 +66,7 @@ void blink() {
     for (byte i = START_PIN ; i < END_PIN ; i++) {
       if (blink_pins[i]) {
         digitalWrite(i,blink_state);
-      }
+    }
   }
 }
 
