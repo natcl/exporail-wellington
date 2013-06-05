@@ -12,7 +12,7 @@ Timer t;
 // input array containing the 2 bytes (pin number and pin state)
 char state[2];
 // table containing true or false if a pin must blink or not
-bool blink_pins[END_PIN];
+bool blink_pins[END_PIN+1];
 // current blink state (to have the blinking in sync)
 bool blink_state = LOW;
 
@@ -22,6 +22,7 @@ void setup() {
   // set each pin to output
   for (byte i = START_PIN ; i <= END_PIN ; i++) {
     pinMode(i, OUTPUT);
+    digitalWrite(i,LOW);
   }
   
   // initialize blink pin array to 0
@@ -29,7 +30,7 @@ void setup() {
     blink_pins[i] = false;  
   }
 
-  test_system();
+  //test_system();
   
   t.every(BLINK_LENGTH, blink);  
 }
