@@ -3,7 +3,7 @@
 Timer t;
 
 #define START_PIN 2
-#define END_PIN 70
+#define END_PIN 69
 #define BLINK_LENGTH 500
 
 // input array containing the 2 bytes (pin number and pin state)
@@ -17,12 +17,12 @@ void setup() {
   Serial.begin(115200);
     
   // set each pin to output
-  for (byte i = START_PIN ; i < END_PIN ; i++) {
+  for (byte i = START_PIN ; i <= END_PIN ; i++) {
     pinMode(i, OUTPUT);
   }
   
   // initialize blink pin array to 0
-  for (byte i = 0 ; i < END_PIN ; i++) {
+  for (byte i = 0 ; i <= END_PIN ; i++) {
     blink_pins[i] = false;  
   }
 
@@ -63,7 +63,7 @@ void blink() {
     else {
       blink_state = LOW;
     }
-    for (byte i = START_PIN ; i < END_PIN ; i++) {
+    for (byte i = START_PIN ; i <= END_PIN ; i++) {
       if (blink_pins[i]) {
         digitalWrite(i,blink_state);
     }
@@ -71,7 +71,7 @@ void blink() {
 }
 
 void all_off() {
-  for (byte i = START_PIN ; i < END_PIN ; i++) {
+  for (byte i = START_PIN ; i <= END_PIN ; i++) {
     digitalWrite(i,LOW);
     blink_state = LOW;
     blink_pins[i] = false;  
@@ -79,7 +79,7 @@ void all_off() {
 }
 
 void test_system() {
-  for (byte i = START_PIN ; i < END_PIN ; i++) {
+  for (byte i = START_PIN ; i <= END_PIN ; i++) {
     digitalWrite(i,HIGH);
     delay(50);
     digitalWrite(i,LOW);  

@@ -1,7 +1,7 @@
 import serial
 import time
 
-pin_list = range(5, 70)
+pin_list = range(5, 69)
 s = serial.Serial('/dev/tty.usbmodem621', 115200)
 time.sleep(5)
 
