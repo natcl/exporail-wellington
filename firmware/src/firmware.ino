@@ -1,5 +1,8 @@
 #include "Timer.h"
 
+// Pins 5 to 69 connected to relays except pin 13
+// Analog pins A0 to A15 are pins 54 to 69
+
 Timer t;
 
 #define START_PIN 2
