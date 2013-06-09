@@ -31,6 +31,20 @@
 				"box" : 				{
 					"fontname" : "Arial",
 					"fontsize" : 12.0,
+					"id" : "obj-3",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 124.0, 371.0, 89.0, 20.0 ],
+					"text" : "loadmess print"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
 					"frgb" : 0.0,
 					"id" : "obj-40",
 					"maxclass" : "comment",
@@ -65,7 +79,6 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 366.0, 118.0, 41.0, 20.0 ],
-					"presentation_rect" : [ 369.75, 119.0, 0.0, 0.0 ],
 					"text" : "All off"
 				}
 
@@ -110,8 +123,7 @@
 					"numoutlets" : 2,
 					"outlettype" : [ "int", "bang" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 307.75, 351.0, 50.0, 20.0 ],
-					"presentation_rect" : [ 313.0, 351.0, 0.0, 0.0 ]
+					"patching_rect" : [ 307.75, 351.0, 50.0, 20.0 ]
 				}
 
 			}
@@ -152,8 +164,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "bang" ],
-					"patching_rect" : [ 406.0, 118.0, 20.0, 20.0 ],
-					"presentation_rect" : [ 472.0, 52.0, 0.0, 0.0 ]
+					"patching_rect" : [ 406.0, 118.0, 20.0, 20.0 ]
 				}
 
 			}
@@ -178,8 +189,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "bang" ],
-					"patching_rect" : [ 346.0, 118.0, 20.0, 20.0 ],
-					"presentation_rect" : [ 375.0, 128.0, 0.0, 0.0 ]
+					"patching_rect" : [ 346.0, 118.0, 20.0, 20.0 ]
 				}
 
 			}
@@ -202,7 +212,7 @@
 					"fontname" : "Arial",
 					"fontsize" : 12.0,
 					"id" : "obj-9",
-					"items" : [ "port", "a", ",", "port", "b", ",", "port", "c" ],
+					"items" : [ "port", "a", ",", "port", "b", ",", "port", "c", ",", "port", "d", ",", "port", "e", ",", "port", "f", ",", "port", "g" ],
 					"maxclass" : "umenu",
 					"numinlets" : 1,
 					"numoutlets" : 3,
@@ -424,6 +434,15 @@
 					"disabled" : 0,
 					"hidden" : 0,
 					"source" : [ "obj-27", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-1", 0 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ "obj-3", 0 ]
 				}
 
 			}
