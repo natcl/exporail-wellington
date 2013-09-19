@@ -2,7 +2,7 @@
 
 ## Dependencies
 
-### Raspberry pi:
+### Raspberry Pi:
 
 ```shell
 sudo apt-get install python-setuptools arduino
