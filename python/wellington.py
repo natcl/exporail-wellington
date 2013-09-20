@@ -66,8 +66,11 @@ def play(filename, speed = 1):
                 mega2.write(chr(pin)+chr(state))
         time.sleep(speed)
 
+def playloop(filename, speed = 1):
+    while True:
+        play(filename, speed)
+
 if len(sys.argv) > 1:
     play(sys.argv[1])
-
     close()
 
