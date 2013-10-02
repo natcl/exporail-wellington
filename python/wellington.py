@@ -91,7 +91,7 @@ class eventPlayer(threading.Thread):
         threading.Thread.__init__(self)
         self.wp = wp
         self.filename = filename
-        self.speed = speed
+        self._speed = speed
         self._loop = loop
         self._stop = False
 
@@ -108,7 +108,7 @@ class eventPlayer(threading.Thread):
             for event in sorted([int(key) for key in parcours.keys()]):
                 print('Event {0}'.format(event))
                 self.wp.event(parcours, event)
-                time.sleep(self.speed)
+                time.sleep(self._speed)
                 if self._stop:
                     self._loop = False
                     break;
