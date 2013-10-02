@@ -6,13 +6,15 @@ import threading
 
 class wellingtonPlayer(threading.Thread):
     def __init__(self):
-
+        threading.Thread.__init__(self)
         if sys.platform == 'linux2':
             mega1_port = '/dev/ttyACM0'
             mega2_port = '/dev/ttyACM1'
         if sys.platform == 'darwin':
             mega1_port = '/dev/tty.usbmodem1421'
             mega2_port = '/dev/tty.usbmodem1411'
+        self.filename = None
+        self.speed = 1
         self.playing = False
         self._stop = False
         self._loop = False
@@ -76,29 +78,45 @@ class wellingtonPlayer(threading.Thread):
         if arduino == 2:
             self.mega2.write(chr(pin)+chr(1))
 
-    def start(self, filename, speed = 1):
+    def play(self, filename, speed = 1, loop = False):
         if not self.playing:
-            with open(filename) as f:
-                parcours = json.loads(f.read())
-            self.playing = True
+            self.filename = filename
+            self.speed = speed
+            self._loop = loop
+            self.start()
+    
+    def run(self):
+        with open(self.filename) as f:
+            parcours = json.loads(f.read())
         
+        self.playing = True
+    
+        while True:
             for event in sorted([int(key) for key in parcours.keys()]):
                 print('Event {0}'.format(event))
                 self.event(parcours, event)
-                time.sleep(speed)
+                time.sleep(self.speed)
                 if self._stop:
+                    self._loop = False
                     break;
-            self.playing = False
-            self._stop = False
-            print 'Exited thread'
-
-    def loopstart(self, filename, speed = 1):
-        self._loop = True
-        while self._loop:
-            self.start(filename, speed)
-
+            if not self._loop:
+                break;
+            if self._stop:
+                break;
+        self.playing = False
+        self._stop = False
+        print 'Exited thread'
+        threading.Thread.__init__(self)
+        
     def stop(self):
         if self.playing:
-            self._loop = False
             self._stop = True
+            self._loop = False
+
+if __name__ == '__main__':
+    import sys
+    wp = wellingtonPlayer()
+    if sys.argv[1] == 'play':
+        wp.play(sys.argv[2], loop = True)
+
 
