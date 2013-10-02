@@ -12,7 +12,7 @@ wp = wellingtonPlayer()
 
 def on_button1(channel):
     print 'Button1 pressed'
-    wp.start('parcours1.json')
+    wp.play('parcours1.json')
 def on_button2(channel):
     print 'Button2 pressed'
     wp.stop()
