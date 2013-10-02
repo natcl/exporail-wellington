@@ -13,11 +13,7 @@ class wellingtonPlayer(threading.Thread):
         if sys.platform == 'darwin':
             mega1_port = '/dev/tty.usbmodem1421'
             mega2_port = '/dev/tty.usbmodem1411'
-        self.filename = None
-        self.speed = 1
         self.playing = False
-        self._stop = False
-        self._loop = False
         
         try:
             self.mega1 = serial.Serial(mega1_port, 115200)
@@ -80,21 +76,38 @@ class wellingtonPlayer(threading.Thread):
 
     def play(self, filename, speed = 1, loop = False):
         if not self.playing:
-            self.filename = filename
-            self.speed = speed
-            self._loop = loop
-            self.start()
-    
-    def run(self):
-        with open(self.filename) as f:
-            parcours = json.loads(f.read())
+            self.playing = True
+            self.ep = eventPlayer(self, filename, speed, loop)
+            self.ep.start()
+
+    def stop(self):
+        if self.playing:
+            self.ep.stop()
+            self.playing = False
         
-        self.playing = True
-    
+
+class eventPlayer(threading.Thread):
+    def __init__(self, wp, filename, speed = 1, loop = False):
+        threading.Thread.__init__(self)
+        self.wp = wp
+        self.filename = filename
+        self.speed = speed
+        self._loop = loop
+        self._stop = False
+
+    def run(self):
+        try:
+            with open(self.filename) as f:
+                parcours = json.loads(f.read())
+        except IOError:
+            print('Error, file {0} not found'.format(self.filename))
+            self.wp.playing = False
+            return
+        
         while True:
             for event in sorted([int(key) for key in parcours.keys()]):
                 print('Event {0}'.format(event))
-                self.event(parcours, event)
+                self.wp.event(parcours, event)
                 time.sleep(self.speed)
                 if self._stop:
                     self._loop = False
@@ -103,15 +116,14 @@ class wellingtonPlayer(threading.Thread):
                 break;
             if self._stop:
                 break;
-        self.playing = False
         self._stop = False
+        self.wp.playing = False
         print 'Exited thread'
-        threading.Thread.__init__(self)
-        
+
     def stop(self):
-        if self.playing:
-            self._stop = True
-            self._loop = False
+        self._stop = True
+        self._loop = False
+
 
 if __name__ == '__main__':
     import sys
