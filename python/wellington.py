@@ -15,6 +15,7 @@ class wellingtonPlayer(threading.Thread):
             mega2_port = '/dev/tty.usbmodem1411'
         self.playing = False
         self._stop = False
+        self._loop = False
         
         try:
             self.mega1 = serial.Serial(mega1_port, 115200)
@@ -77,9 +78,9 @@ class wellingtonPlayer(threading.Thread):
 
     def start(self, filename, speed = 1):
         if not self.playing:
-            self.playing = True
             with open(filename) as f:
                 parcours = json.loads(f.read())
+            self.playing = True
         
             for event in sorted([int(key) for key in parcours.keys()]):
                 print('Event {0}'.format(event))
@@ -91,7 +92,13 @@ class wellingtonPlayer(threading.Thread):
             self._stop = False
             print 'Exited thread'
 
+    def loopstart(self, filename, speed = 1):
+        self._loop = True
+        while self._loop:
+            self.start(filename, speed)
+
     def stop(self):
         if self.playing:
+            self._loop = False
             self._stop = True
 
