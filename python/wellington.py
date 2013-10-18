@@ -130,5 +130,9 @@ if __name__ == '__main__':
     wp = wellingtonPlayer()
     if sys.argv[1] == 'play':
         wp.play(sys.argv[2], loop = True)
+        while True:
+            pass
+    else:
+        pass
 
 
