@@ -67,11 +67,11 @@ GPIO.add_event_detect(button1, GPIO.FALLING, callback=on_button1, bouncetime=100
 GPIO.add_event_detect(button2, GPIO.FALLING, callback=on_button2, bouncetime=1000)
 GPIO.add_event_detect(button3, GPIO.FALLING, callback=on_button3, bouncetime=1000)
 GPIO.add_event_detect(button4, GPIO.FALLING, callback=on_button4, bouncetime=1000)
-GPIO.add_event_detect(button5, GPIO.FALLING, callback=on_button1, bouncetime=1000)
-GPIO.add_event_detect(button6, GPIO.FALLING, callback=on_button2, bouncetime=1000)
-GPIO.add_event_detect(button7, GPIO.FALLING, callback=on_button3, bouncetime=1000)
-GPIO.add_event_detect(button8, GPIO.FALLING, callback=on_button4, bouncetime=1000)
-GPIO.add_event_detect(button9, GPIO.FALLING, callback=on_button4, bouncetime=1000)
+GPIO.add_event_detect(button5, GPIO.FALLING, callback=on_button5, bouncetime=1000)
+GPIO.add_event_detect(button6, GPIO.FALLING, callback=on_button6, bouncetime=1000)
+GPIO.add_event_detect(button7, GPIO.FALLING, callback=on_button7, bouncetime=1000)
+GPIO.add_event_detect(button8, GPIO.FALLING, callback=on_button8, bouncetime=1000)
+GPIO.add_event_detect(button9, GPIO.FALLING, callback=on_button9, bouncetime=1000)
 
 
 if sys.flags.interactive:
